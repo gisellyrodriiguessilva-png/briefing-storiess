@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing de Cobertura — Stories by Giselly</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF7; --charcoal: #1C1917;
+    --mid: #6B6560; --accent: #C17D4A; --accent-light: #EDD9C4;
+    --accent-pale: #F9F0E8; --border: rgba(28,25,23,0.14);
+    --radius: 12px;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  body { font-family: var(--sans); background: var(--cream); color: var(--charcoal); min-height: 100vh; }
+
+  /* HERO */
+  .hero { background: var(--charcoal); padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 0%, rgba(193,125,74,0.18) 0%, transparent 65%); pointer-events: none; }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(28px, 5vw, 46px); font-weight: 400; color: #FDFAF7; line-height: 1.2; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { max-width: 500px; margin: 0 auto; font-size: 15px; font-weight: 300; color: rgba(253,250,247,0.7); line-height: 1.75; }
+  .hero-line { width: 48px; height: 1px; background: var(--accent); margin: 28px auto 0; }
+
+  /* MAIN */
+  .main { max-width: 660px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* SECTION BLOCK */
+  .sec { margin-bottom: 40px; }
+  .sec-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .sec-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--charcoal); margin-bottom: 6px; }
+  .sec-desc { font-size: 13px; color: var(--mid); margin-bottom: 20px; line-height: 1.6; }
+
+  /* FIELDS */
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 14px; font-weight: 500; color: var(--charcoal); margin-bottom: 5px; }
+  .req { color: var(--accent); }
+  .field-hint { font-size: 12px; color: var(--mid); margin-bottom: 7px; line-height: 1.5; }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%; padding: 11px 14px; font-family: var(--sans); font-size: 14px;
+    color: var(--charcoal); background: var(--warm-white);
+    border: 1px solid var(--border); border-radius: 8px; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none;
+  }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(193,125,74,0.12); }
+  textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+  /* CHECKBOXES como chips visuais */
+  .check-group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .check-group input[type="checkbox"] { display: none; }
+  .check-group label {
+    padding: 7px 14px; border-radius: 99px; border: 1px solid var(--border);
+    background: var(--warm-white); font-size: 13px; color: var(--mid);
+    cursor: pointer; transition: all 0.15s; user-select: none;
+    font-weight: 400;
+  }
+  .check-group input[type="checkbox"]:checked + label {
+    background: var(--accent); border-color: var(--accent); color: white;
+  }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  /* INFO BOXES */
+  .info-box { background: var(--warm-white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 12px; }
+  .info-box-title { font-size: 13px; font-weight: 500; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .info-box-text { font-size: 13px; color: var(--mid); line-height: 1.65; }
+
+  /* SUBMIT */
+  .submit-wrap { margin-top: 32px; text-align: right; }
+  button[type="submit"] {
+    padding: 13px 32px; background: var(--accent); color: white;
+    border: none; border-radius: 8px; font-family: var(--sans);
+    font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.18s;
+  }
+  button[type="submit"]:hover { background: #A8692F; }
+  button[type="submit"]:active { transform: scale(0.98); }
+
+  /* FILE */
+  .file-wrap { border: 1.5px dashed var(--border); border-radius: 8px; padding: 18px; text-align: center; background: var(--warm-white); cursor: pointer; transition: border-color 0.2s; }
+  .file-wrap:hover { border-color: var(--accent); }
+  .file-icon { font-size: 26px; margin-bottom: 6px; }
+  .file-text { font-size: 13px; color: var(--mid); }
+  .file-text strong { color: var(--accent); }
+  input[type="file"] { display: none; }
+  .file-names { margin-top: 10px; font-size: 12px; color: var(--mid); }
+
+  footer { text-align: center; padding: 28px 24px; font-size: 12px; color: var(--mid); border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Briefing de cobertura</div>
+  <h1>Vamos fazer algo<br><em>incrível</em> juntos</h1>
+  <p>Fico muito feliz que você vai me deixar fazer parte do seu evento! Separa uns minutinhos e responde com calma. Quanto mais detalhes, melhor a cobertura. Se tiver dúvida em alguma pergunta, me chama no WhatsApp.</p>
+  <div class="hero-line"></div>
+</div>
+
+<div class="main">
+
+  <!--
+    ════════════════════════════════════════════════════
+    FORMULÁRIO NETLIFY
+    - name="briefing-stories" identifica o form no painel
+    - data-netlify="true" ativa a detecção automática
+    - action="/obrigado" redireciona após o envio
+    - Todos os campos têm name="" para serem capturados
+    ════════════════════════════════════════════════════
+  -->
+  <form
+    action="https://formspree.io/f/xqenzdbq"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <!-- Formspree: redireciona para página de confirmação após envio -->
+    <input type="hidden" name="_subject" value="📋 Novo briefing de cobertura recebido!" />
+    <input type="hidden" name="_next" value="obrigado.html" />
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 01 — SOBRE O EVENTO               -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-label">Seção 01</div>
+      <h2 class="sec-title">Sobre o evento</h2>
+      <p class="sec-desc">Informações básicas para eu me preparar bem antes do grande dia.</p>
+
+      <div class="field">
+        <label>Seu nome completo <span class="req">*</span></label>
+        <input type="text" name="nome" placeholder="Como posso te chamar?" required />
+      </div>
+
+      <div class="field">
+        <label>Tipo de evento <span class="req">*</span></label>
+        <select name="tipo-de-evento" required>
+          <option value="">Selecione…</option>
+          <option>Casamento</option>
+          <option>Aniversário adulto</option>
+          <option>Aniversário infantil</option>
+          <option>Chá de bebê / revelação</option>
+          <option>Formatura</option>
+          <option>Corporativo / institucional</option>
+          <option>Religioso (batizado, crisma…)</option>
+          <option>Outro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Nome do evento ou da(o) homenageada(o) <span class="req">*</span></label>
+        <div class="field-hint">Ex: Festa de 30 anos da Ana · Casamento João & Maria · Summit de Vendas 2025</div>
+        <input type="text" name="nome-evento" placeholder="Nome do evento" required />
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 02 — CLIMA & IDENTIDADE VISUAL    -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-label">Seção 02</div>
+      <h2 class="sec-title">Clima & identidade visual</h2>
+      <p class="sec-desc">Essas referências me ajudam a deixar os stories alinhados com a estética da festa desde o primeiro frame.</p>
+
+      <div class="field">
+        <label>Qual o clima do evento?</label>
+        <div class="field-hint">Pode selecionar mais de um.</div>
+        <div class="check-group">
+          <input type="checkbox" name="clima[]" value="Íntimo e emotivo" id="c1" /><label for="c1">Íntimo e emotivo</label>
+          <input type="checkbox" name="clima[]" value="Descontraído e divertido" id="c2" /><label for="c2">Descontraído e divertido</label>
+          <input type="checkbox" name="clima[]" value="Elegante e sofisticado" id="c3" /><label for="c3">Elegante e sofisticado</label>
+          <input type="checkbox" name="clima[]" value="Agitado e festivo" id="c4" /><label for="c4">Agitado e festivo</label>
+          <input type="checkbox" name="clima[]" value="Formal e institucional" id="c5" /><label for="c5">Formal e institucional</label>
+          <input type="checkbox" name="clima[]" value="Infantil e colorido" id="c6" /><label for="c6">Infantil e colorido</label>
+          <input type="checkbox" name="clima[]" value="Romântico" id="c7" /><label for="c7">Romântico</label>
+          <input type="checkbox" name="clima[]" value="Religioso e solene" id="c8" /><label for="c8">Religioso e solene</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Tema ou conceito visual</label>
+        <div class="field-hint">Ex: jardim provençal · preto e dourado · safari · minimalista · boho…</div>
+        <input type="text" name="tema" placeholder="Descreva o tema" />
+      </div>
+
+      <div class="field">
+        <label>Cores principais da identidade visual</label>
+        <div class="field-hint">Usadas para harmonizar filtros, textos e transições nos stories.</div>
+        <input type="text" name="cores" placeholder="Ex: nude, terracota e verde musgo" />
+      </div>
+
+      <div class="field">
+        <label>Referências de stories que você gosta</label>
+        <div class="field-hint">Links de perfis do Instagram, exemplos de cobertura ou descrição do estilo que te inspira.</div>
+        <textarea name="referencias" placeholder="@ de perfis, links ou descrição do estilo"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Logotipo, arte ou identidade do evento</label>
+        <div class="field-hint">Envie arquivos em PNG ou JPG. Pode selecionar mais de um.</div>
+        <div class="file-wrap" onclick="document.getElementById('arquivos').click()">
+          <div class="file-icon">🖼️</div>
+          <div class="file-text"><strong>Clique para selecionar arquivos</strong><br>PNG ou JPG · máx. 10MB por arquivo</div>
+          <div class="file-names" id="fileNames"></div>
+        </div>
+        <input type="file" id="arquivos" name="arquivos" accept=".png,.jpg,.jpeg" multiple onchange="showFiles(this)" />
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 03 — PROGRAMAÇÃO & MOMENTOS           -->
+    <!-- ══════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-label">Seção 03</div>
+      <h2 class="sec-title">Programação & momentos-chave</h2>
+      <p class="sec-desc">É aqui que o real time acontece. Com a ordem dos momentos, nenhum registro importante vai escapar.</p>
+
+      <div class="field">
+        <label>Programação do evento</label>
+        <div class="field-hint">Escreva a ordem e os horários de cada momento. Exemplos: Casamento → cerimônia, entrada dos noivos, votos, troca de alianças, primeira dança, corte do bolo… · Aniversário → entrada, parabéns, brinde, corte do bolo… · Corporativo → abertura, palestrantes, coffee break, encerramento…</div>
+        <textarea name="programacao" style="min-height:130px;" placeholder="19h00 — Chegada dos convidados&#10;20h00 — Entrada da aniversariante&#10;20h30 — Parabéns e corte do bolo&#10;21h00 — Brinde&#10;..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Momentos ESSENCIAIS que não podem faltar <span class="req">*</span></label>
+        <textarea name="momentos-essenciais" placeholder="Liste tudo que é imprescindível registrar" required></textarea>
+      </div>
+
+      <div class="field">
+        <label>Há alguma surpresa planejada?</label>
+        <div class="field-hint">Entrada surpresa, vídeo especial, presente, declaração — preciso saber para não estragar! Deixe em branco se não houver.</div>
+        <textarea name="surpresa" placeholder="Descreva a surpresa…"></textarea>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 04 — DETALHES ESPECÍFICOS         -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-label">Seção 04</div>
+      <h2 class="sec-title">Detalhes do seu evento</h2>
+      <p class="sec-desc">Preencha apenas o que se aplicar ao seu tipo de evento. Pode deixar em branco o que não for relevante.</p>
+
+      <!-- Casamento -->
+      <div class="field">
+        <label>💒 Cerimônia e recepção são no mesmo local?</label>
+        <select name="cas-local">
+          <option value="">Não se aplica / Selecione…</option>
+          <option>Sim</option>
+          <option>Não — são em locais diferentes</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>💒 Nomes completos dos noivos</label>
+        <input type="text" name="cas-noivos" placeholder="Ex: João Silva e Maria Souza" />
+      </div>
+      <div class="field">
+        <label>💒 Haverá first look?</label>
+        <div class="field-hint">Momento íntimo dos noivos antes da cerimônia.</div>
+        <select name="cas-firstlook">
+          <option value="">Não se aplica / Selecione…</option>
+          <option>Sim</option><option>Não</option><option>Não sei ainda</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>💒 Nome e contato do cerimonialista</label>
+        <div class="field-hint">Para eu me alinhar com a equipe no dia.</div>
+        <input type="text" name="cas-cerimonialista" placeholder="Nome — WhatsApp" />
+      </div>
+      <div class="field">
+        <label>💒 Música da primeira dança</label>
+        <input type="text" name="cas-primeira-danca" placeholder="Nome da música — Artista" />
+      </div>
+
+      <hr>
+
+      <!-- Aniversário adulto -->
+      <div class="field">
+        <label>🥂 Quantos anos completa?</label>
+        <input type="text" name="aniv-idade" placeholder="Ex: 30 anos" />
+      </div>
+      <div class="field">
+        <label>🥂 Haverá show ou atração ao vivo?</label>
+        <input type="text" name="aniv-atracao" placeholder="Artista, banda, DJ… Deixe em branco se não houver." />
+      </div>
+      <div class="field">
+        <label>🥂 Haverá vídeo surpresa de parentes ou amigos?</label>
+        <select name="aniv-video-surpresa">
+          <option value="">Não se aplica / Selecione…</option>
+          <option>Sim</option><option>Não</option>
+        </select>
+      </div>
+
+      <hr>
+
+      <!-- Aniversário infantil -->
+      <div class="field">
+        <label>🎈 Idade e tema do aniversariante</label>
+        <input type="text" name="inf-idade-tema" placeholder="Ex: 3 anos — tema Fazendinha" />
+      </div>
+      <div class="field">
+        <label>🎈 Haverá recreação? Qual horário?</label>
+        <input type="text" name="inf-recreacao" placeholder="Ex: Recreação às 16h" />
+      </div>
+
+      <hr>
+
+      <!-- Chá de bebê / revelação -->
+      <div class="field">
+        <label>👶 Nome do bebê (se já escolhido)</label>
+        <input type="text" name="cha-nome-bebe" placeholder="Ou deixe em branco se ainda é segredo!" />
+      </div>
+      <div class="field">
+        <label>👶 Quem sabe o sexo do bebê antes da festa?</label>
+        <select name="cha-segredo">
+          <option value="">Não se aplica / Selecione…</option>
+          <option>Só eu e o parceiro(a)</option>
+          <option>Existe um guardião do segredo</option>
+          <option>Todos sabem menos os pais</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>👶 Como vai acontecer a revelação?</label>
+        <div class="field-hint">Descreva para eu me posicionar no momento certo.</div>
+        <textarea name="cha-revelacao" placeholder="Ex: balões, caixinha, fumaça colorida…"></textarea>
+      </div>
+
+      <hr>
+
+      <!-- Formatura -->
+      <div class="field">
+        <label>🎓 Nome completo do(a) formando(a) em destaque</label>
+        <input type="text" name="form-nome" placeholder="Nome" />
+      </div>
+      <div class="field">
+        <label>🎓 Haverá colação de grau e jantar separados?</label>
+        <select name="form-colacao">
+          <option value="">Não se aplica / Selecione…</option>
+          <option>Sim, dois momentos</option>
+          <option>Só colação</option>
+          <option>Só jantar / festa</option>
+        </select>
+      </div>
+
+      <hr>
+
+      <!-- Corporativo -->
+      <div class="field">
+        <label>🏢 Nome da empresa</label>
+        <input type="text" name="corp-empresa" placeholder="Razão social ou nome fantasia" />
+      </div>
+      <div class="field">
+        <label>🏢 Objetivo principal do evento</label>
+        <textarea name="corp-objetivo" placeholder="Ex: lançamento de produto, celebração de resultados…"></textarea>
+      </div>
+      <div class="field">
+        <label>🏢 Logotipo da empresa pode aparecer nos stories?</label>
+        <select name="corp-logo">
+          <option value="">Não se aplica / Selecione…</option>
+          <option>Sim</option><option>Não</option><option>Somente em alguns momentos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🏢 Existe guia de comunicação ou restrições de marca?</label>
+        <div class="field-hint">Se houver, pode me enviar pelo WhatsApp.</div>
+        <select name="corp-guia">
+          <option value="">Não se aplica / Selecione…</option>
+          <option>Sim, vou enviar</option><option>Não há restrições</option>
+        </select>
+      </div>
+
+      <hr>
+
+      <!-- Religioso -->
+      <div class="field">
+        <label>✝️ Rito ou denominação</label>
+        <input type="text" name="rel-rito" placeholder="Ex: Católico, Evangélico, Espírita…" />
+      </div>
+      <div class="field">
+        <label>✝️ Há restrições de filmagem no espaço religioso?</label>
+        <textarea name="rel-restricoes" placeholder="Ex: não filmar o altar, silêncio durante a cerimônia…"></textarea>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 05 — MÚSICAS                      -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-label">Seção 05</div>
+      <h2 class="sec-title">Músicas</h2>
+      <p class="sec-desc">A trilha sonora certa transforma a cobertura. Me conta tudo sobre o que você quer ouvir.</p>
+
+      <div class="field">
+        <label>Músicas que você quer na cobertura <span class="req">*</span></label>
+        <div class="field-hint">Nome + artista. Link do Spotify ou YouTube é perfeito! Pode listar quantas quiser.</div>
+        <textarea name="musicas" style="min-height:120px;" placeholder="1. Música X — Artista Y&#10;2. Música Z — Artista W&#10;..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label>Alguma música para um momento específico?</label>
+        <div class="field-hint">Ex: "quero a música X só no momento do parabéns"</div>
+        <textarea name="musica-momento" placeholder="Momento → Música"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Músicas ou estilos que você NÃO quer de forma alguma</label>
+        <input type="text" name="musicas-proibidas" placeholder="Qualquer estilo ou música que não combine" />
+      </div>
+
+      <div class="field">
+        <label>Estilo musical predominante do evento</label>
+        <div class="field-hint">Pode selecionar mais de um.</div>
+        <div class="check-group">
+          <input type="checkbox" name="estilo[]" value="Pop nacional" id="e1" /><label for="e1">Pop nacional</label>
+          <input type="checkbox" name="estilo[]" value="Pop internacional" id="e2" /><label for="e2">Pop internacional</label>
+          <input type="checkbox" name="estilo[]" value="Sertanejo" id="e3" /><label for="e3">Sertanejo</label>
+          <input type="checkbox" name="estilo[]" value="Pagode / Samba" id="e4" /><label for="e4">Pagode / Samba</label>
+          <input type="checkbox" name="estilo[]" value="Funk" id="e5" /><label for="e5">Funk</label>
+          <input type="checkbox" name="estilo[]" value="Eletrônico" id="e6" /><label for="e6">Eletrônico</label>
+          <input type="checkbox" name="estilo[]" value="Romântico / MPB" id="e7" /><label for="e7">Romântico / MPB</label>
+          <input type="checkbox" name="estilo[]" value="Gospel" id="e8" /><label for="e8">Gospel</label>
+          <input type="checkbox" name="estilo[]" value="Infantil" id="e9" /><label for="e9">Infantil</label>
+          <input type="checkbox" name="estilo[]" value="Instrumental / ambiente" id="e10" /><label for="e10">Instrumental / ambiente</label>
+          <input type="checkbox" name="estilo[]" value="Variado" id="e11" /><label for="e11">Variado</label>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- 06 — OBSERVAÇÕES & INFORMAÇÕES            -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-label">Seção 06</div>
+      <h2 class="sec-title">Observações finais</h2>
+      <p class="sec-desc">Qualquer detalhe extra que eu precise saber — e informações importantes sobre o meu trabalho.</p>
+
+      <div class="field">
+        <label>Tem algo mais que eu precise saber?</label>
+        <div class="field-hint">Restrições de acesso, pedidos especiais, outros profissionais no evento… fique à vontade!</div>
+        <textarea name="observacoes" placeholder="Fique à vontade para contar tudo!"></textarea>
+      </div>
+
+      <hr>
+
+      <div style="margin-bottom:8px;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);">Informações importantes sobre o serviço</div>
+      <p style="font-size:13px;color:var(--mid);margin-bottom:18px;line-height:1.6;">Antes de finalizar, leia com atenção. É importante que estejamos alinhadas!</p>
+
+      <div class="info-box">
+        <div class="info-box-title">📱 Postagem dos stories</div>
+        <div class="info-box-text">Os stories são postados <strong>preferencialmente em tempo real</strong>, durante o evento. Em casos de instabilidade técnica (internet, sinal ou equipamento), a postagem pode ocorrer em até <strong>24 horas após o encerramento do evento</strong>.</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">📁 Entrega dos materiais</div>
+        <div class="info-box-text">Os materiais <strong>editados e brutos</strong> serão enviados via Google Drive em até <strong>2 dias úteis</strong> após o evento, para que tudo seja organizado e entregue com cuidado.</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">🔐 Acesso ao perfil</div>
+        <div class="info-box-text">Para as postagens, o perfil ficará <strong>logado no meu aparelho</strong> durante a cobertura. Minha atuação se limita <strong>exclusivamente à postagem dos stories</strong>. Não tenho responsabilidade nem acesso sobre direct, feed, reels ou configurações da conta.</div>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit">Enviar briefing ✓</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<footer>Formulário de briefing para cobertura de stories · Feito com carinho ✨</footer>
+
+<script>
+function showFiles(input) {
+  const names = Array.from(input.files).map(f => f.name).join(', ');
+  document.getElementById('fileNames').textContent = names || '';
+}
+</script>
+</body>
+</html>
